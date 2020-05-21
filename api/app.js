@@ -7,6 +7,8 @@ const { mongoose } = require('./db/mongoose');
 
 // Load models
 const { Board } = require('./db/models/board.model');
+const { Column } = require('./db/models/column.model');
+const { Task } = require('./db/models/task.model');
 
 
 // Middleware
@@ -38,7 +40,7 @@ app.listen(3000, () => {
 
 /**
  * GET /board
- * Purpose: Get board
+ * Purpose: Get all board
  */
 
 app.get("/boards", (req, res) => {
@@ -114,5 +116,177 @@ app.delete("/boards/:id", (req, res) => {
 
         // delete all the tasks that are on the deleted list
         // deleteTasksFromList(removedListDoc._id);
+    });
+});
+
+// END board routes
+
+// COLUMN routes
+
+/**
+ * GET /board
+ * Purpose: Get all columns
+ */
+
+app.get("/boards/:boardId/columns", (req, res) => {
+    // Return an array of  the boards in the database that belong to the authenticated user
+    Column.find({
+        _boardId: req.params.boardId
+    }).then((columns)=>{
+        res.send(columns); 
+    }).catch((e) => {
+        res.send(e);
+    });
+});
+
+/**
+ * GET /boards/:boardId/columns/:columnId
+ * Purpose: Get one particular column
+ */
+
+app.get("/boards/:boardId/columns/:id", (req, res) => {
+    // Find one particular task
+    Column.findOne(
+        { 
+            _id: req.params.id,
+            _boardId: req.params.boardId
+        }
+    ).then((column) => {
+        console.log(column);
+        res.send(column);
+    });
+});
+
+/**
+ * POST /boards/:boardId/columns
+ * Purpose: Create new column with the "boardId"
+ */
+app.post("/boards/:boardId/columns", (req, res) => {
+    // Create a new column and return the new column document back to the user, which includes the id
+    // Column information will be passed in via JSON request body
+
+    let newColumn = new Column({
+        title: req.body.title,
+        _boardId: req.params.boardId
+    })
+    newColumn.save().then((columnDoc) => {
+        res.send(columnDoc);
+    });
+});
+
+/**
+ * PATCH /boards/:boardId/columns
+ * Purpose: Create new column with the "boardId"
+ */
+app.patch("/boards/:boardId/columns/:id", (req, res) => {
+    // Create a new column and return the new column document back to the user, which includes the id
+    // Column information will be passed in via JSON request body
+
+    // 
+    Column.findOneAndUpdate({ 
+            _id: req.params.id,
+            _boardId: req.params.boardId
+    }, { $set: req.body}
+    ).then(() => {
+        res.send({message: "Update completed"});
+    });
+});
+
+/**
+ * DELETE /boards/:boardId/columns/:id
+ * Purpose: Delete specified task
+ */
+app.delete("/boards/:boardId/columns/:id", (req, res) => {
+
+    Column.findOneAndRemove({
+        _id: req.params.id,
+        _boardId: req.params.boardId
+    }).then((removedDoc) => {
+        res.send(removedDoc);
+    });
+});
+
+// END column routes
+
+// TASK routes
+
+/**
+ * GET /boards/:boardId/columns/:columnId/tasks
+ * Purpose: Get all tasks
+ */
+
+app.get("/boards/:boardId/columns/:columnId/tasks", (req, res) => {
+    // Return an array of  the tasks in the database that belong to the authenticated user
+    Task.find({
+        _columnId: req.params.columnId
+    }).then((tasks) => {
+        res.send(tasks);
+    }).catch((e) => {
+        res.send(e);
+    });
+});
+
+/**
+ * GET /boards/:boardId/columns/:columnId/tasks/:id
+ * Purpose: Get one particular task
+ */
+
+app.get("/boards/:boardId/columns/:columnId/tasks/:id", (req, res) => {
+    // Find one particular task
+    Task.findOne(
+        { 
+            _id: req.params.id,
+            _columnId: req.params.columnId
+        }
+    ).then((task) => {
+        res.send(task);
+    });
+});
+
+/**
+ * POST /boards/:boardId/columns/:columnId/tasks
+ * Purpose: Create new task with the "columnId"
+ */
+app.post("/boards/:boardId/columns/:columnId/tasks", (req, res) => {
+    // Create a new task and return the new task document back to the user, which includes the id
+    // Column information will be passed in via JSON request body
+
+    let newTask = new Task({
+        title: req.body.title,
+        _columnId: req.params.columnId
+    })
+
+    newTask.save().then((taskDoc) => {
+        res.send(taskDoc);
+    });
+});
+
+/**
+ * PATCH /boards/:boardId/columns/:columnId/tasks/:id
+ * Purpose: Update task with the "id"
+ */
+app.patch("/boards/:boardId/columns/:columnId/tasks/:id", (req, res) => {
+    
+    Task.findOneAndUpdate({ 
+            _id: req.params.id,
+            _columnId: req.params.columnId
+    }, { $set: req.body}
+    ).then(() => {
+        // res.send(updtTask);
+        res.send({message: "Update completed"});
+    });
+});
+
+/**
+ * DELETE /boards/:boardId/columns/:columnId/tasks/:id
+ * Purpose: Delete specified task
+ */
+app.delete("/boards/:boardId/columns/:columnId/tasks/:id", (req, res) => {
+
+    Task.findByIdAndRemove({
+        _id: req.params.id,
+        _columnId: req.params.columnId
+    }).then((removedDoc) => {
+        res.send(removedDoc);
     });
 });
