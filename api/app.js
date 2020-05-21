@@ -26,6 +26,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.listen(3000, () => {
+    console.log("Server is listening on port 3000");
+});
+
 // End middleware
 
 // Route handlers
@@ -78,6 +82,37 @@ app.post("/boards", (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log("Server is listening on port 3000");
+/**
+ * PATCH /boards/:id
+ * Purpose: Update specified board
+ */
+app.patch("/boards/:id", (req, res) => {
+    // We want to update the specified list ( list document with id in the URL ) with new values specified in the JSON body
+
+    Board.findOneAndUpdate(
+        // Search Statement
+        { _id: req.params.id },
+        // Update Statement
+        { $set: req.body}
+        // We are using req.params.id, because the id will come through the url
+        // "$set" will get the whole object List, so the method will update all the informations
+    ).then(() => { 
+        res.send({ 'message': 'changes applied successfully'});
+    });
+});
+
+/**
+ * DELETE /boards/:id
+ * Purpose: Delete specified list
+ */
+app.delete("/boards/:id", (req, res) => {
+    // We want to delete the specified list ( list document with id in the URL )
+    Board.findOneAndRemove({
+        _id: req.params.id
+    }).then((removedListDoc) => {
+        res.send(removedListDoc);
+
+        // delete all the tasks that are on the deleted list
+        // deleteTasksFromList(removedListDoc._id);
+    });
 });
