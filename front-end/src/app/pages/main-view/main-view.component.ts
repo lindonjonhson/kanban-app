@@ -12,8 +12,9 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class MainViewComponent implements OnInit {
 
-  boardId: string;
   board: Board;
+  boardId: string;
+  boardTitle: string;
 
   constructor(private appServ: AppService, private route: ActivatedRoute, private router: Router) { }
 
@@ -31,10 +32,11 @@ export class MainViewComponent implements OnInit {
           console.log(this.boardId);
           this.appServ.getBoard(this.boardId).subscribe((board: Board) => {
             this.board = board;
+            this.boardTitle = board.title;
           });
         }
       }
-    )
+    );
   }
 
   drop(event: CdkDragDrop<string[]>) {
