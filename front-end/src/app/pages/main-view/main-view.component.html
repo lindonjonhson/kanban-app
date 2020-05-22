@@ -10,14 +10,14 @@
 
     <div class="board">
         <div class="board-bar">
-            <p class="board-name">{{board.name}}</p>
+            <p class="board-name">{{board.title}}</p>
         </div>
 
         <div class="board-wrapper">
             <div class="board-columns" cdkDropListGroup>
 
                 <!--IDEA COLUMN-->
-                <div class="board-column" *ngFor="let column of board.columns">
+                <div class="board-column" *ngFor="let column of dummyBoard.columns">
 
                     <div class="column-title">{{column.name}}</div>
 

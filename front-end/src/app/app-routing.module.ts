@@ -1,10 +1,13 @@
+import { BoardViewComponent } from './pages/board-view/board-view.component';
 import { MainViewComponent } from './pages/main-view/main-view.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', component: MainViewComponent }
+  { path: '', redirectTo: 'boards', pathMatch: 'full' },
+  { path: 'boards', component: BoardViewComponent },
+  { path: 'board/:id', component: MainViewComponent }
 ];
 
 @NgModule({
