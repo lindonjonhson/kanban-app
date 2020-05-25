@@ -1,8 +1,9 @@
 import { AppService } from './../../services/app.service';
-import { Board } from './../../models/board.model';
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Board } from './../../models/board.model';
 import { Column } from 'src/app/models/column.model';
+import { Task } from 'src/app/models/task.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
@@ -12,9 +13,11 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class MainViewComponent implements OnInit {
 
-  board: Board;
+  myBoard: Board;
+  myColumns: Column[];
   boardId: string;
   boardTitle: string;
+  arrayBox;
 
   constructor(private appServ: AppService, private route: ActivatedRoute, private router: Router) { }
 
@@ -29,10 +32,32 @@ export class MainViewComponent implements OnInit {
       (params: Params) => {
         if (params.id){
           this.boardId = params.id;
-          console.log(this.boardId);
+          // console.log(this.boardId);
+
+          // Getting board data
+
           this.appServ.getBoard(this.boardId).subscribe((board: Board) => {
-            this.board = board;
-            this.boardTitle = board.title;
+            this.myBoard = board;
+            this.boardTitle = this.myBoard.title;
+
+            // Getting columns data
+
+            this.appServ.getColumns(this.myBoard._id).subscribe((columns: Column[]) => {
+              this.myColumns = columns;
+              // console.log(this.myColumns);
+
+              // And now we gonna collect the tasks for each column
+
+              this.myColumns.forEach((column) => {
+
+                // Retrieving the tasks
+
+                this.appServ.getTasks(column._boardId, column._id).subscribe((tasks: Task[]) => {
+                  column.tasks = tasks;
+                  console.log(column.tasks);
+                });
+              });
+            });
           });
         }
       }

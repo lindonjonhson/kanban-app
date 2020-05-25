@@ -7,7 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'boards', pathMatch: 'full' },
   { path: 'boards', component: BoardViewComponent },
-  { path: 'board/:id', component: MainViewComponent }
+  { path: 'boards/:id', component: MainViewComponent }
 ];
 
 @NgModule({

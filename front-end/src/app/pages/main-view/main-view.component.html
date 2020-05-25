@@ -17,16 +17,16 @@
             <div class="board-columns" cdkDropListGroup>
 
                 <!--IDEA COLUMN-->
-                <div class="board-column" *ngFor="let column of dummyBoard.columns">
+                <div class="board-column" *ngFor="let column of myColumns">
 
-                    <div class="column-title">{{column.name}}</div>
+                    <div class="column-title">{{column.title}}</div>
 
                     <div class="tasks-container"
                         cdkDropList
                         [cdkDropListData]="column.tasks"
                         (cdkDropListDropped)="drop($event)">
 
-                        <div class="task"  *ngFor="let item of column.tasks" cdkDrag>{{item}}</div>
+                        <div class="task"  *ngFor="let task of column.tasks" cdkDrag>{{task.title}}</div>
 
                     </div>
 
