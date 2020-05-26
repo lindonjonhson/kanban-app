@@ -13,11 +13,9 @@
             <p class="board-name">Select your board</p>
         </div>
 
-        <div class="board-wrapper">
-            <div class="board-columns" cdkDropListGroup>
-
-            </div>
-        </div>
+        <section class="board-grid">
+            <div class="board-card" *ngFor="let board of this.boards">{{board.title}}</div>
+        </section>
     </div>
 
 </div>
