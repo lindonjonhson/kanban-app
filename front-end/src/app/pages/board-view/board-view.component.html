@@ -14,7 +14,7 @@
         </div>
 
         <section class="board-grid">
-            <div class="board-card" *ngFor="let board of this.boards">{{board.title}}</div>
+            <div class="board-card" *ngFor="let board of this.boards" [routerLink]="['/boards', board._id]" routerLinkActive="is-active"  >{{board.title}}</div>
         </section>
     </div>
 
