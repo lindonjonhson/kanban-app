@@ -9,6 +9,6 @@ Also, I've made a few changes to the project:
 
 ## Descrition
 
-This is a project using the MEAN Stack. Besides that I used some frameworks such as Bulma, Nodemon, Express, Mongoose and JWT for authentication.
+This project uses Angular's CDK and the MEAN Stack. Besides that I used some frameworks such as Bulma, Nodemon, Express, Mongoose and JWT for authentication.
 
 You can find the original [here](https://github.com/Devstackr/kanban-angular-layout).
