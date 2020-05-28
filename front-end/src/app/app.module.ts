@@ -7,12 +7,18 @@ import { MainViewComponent } from './pages/main-view/main-view.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { BoardViewComponent } from './pages/board-view/board-view.component';
+import { NewTaskComponent } from './pages/new-task/new-task.component';
+import { NewBoardComponent } from './pages/new-board/new-board.component';
+import { NewColumnComponent } from './pages/new-column/new-column.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainViewComponent,
-    BoardViewComponent
+    BoardViewComponent,
+    NewTaskComponent,
+    NewBoardComponent,
+    NewColumnComponent
   ],
   imports: [
     BrowserModule,
