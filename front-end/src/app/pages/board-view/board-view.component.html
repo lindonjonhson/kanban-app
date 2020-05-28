@@ -15,6 +15,9 @@
 
         <section class="board-grid">
             <div class="board-card" *ngFor="let board of this.boards" [routerLink]="['/boards', board._id]" routerLinkActive="is-active"  >{{board.title}}</div>
+            <br>
+            
+            <div routerLink="/new-board" class="board-card create-board">Create new board</div>
         </section>
     </div>
 
