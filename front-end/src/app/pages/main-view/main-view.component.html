@@ -29,7 +29,13 @@
 
                         <div class="task"  *ngFor="let task of column.tasks" cdkDrag>{{task.title}}</div>
 
+                        <!-- <div class="task" >+ New task</div> -->
+
                     </div>
+
+                    <button class="add-btn circle-add-button button is-primary has-background-dark">
+                        <span class="material-icons md-48">add</span>
+                    </button>
 
                 </div>
 
