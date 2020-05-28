@@ -1,3 +1,4 @@
+import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { NewBoardComponent } from './pages/new-board/new-board.component';
 import { BoardViewComponent } from './pages/board-view/board-view.component';
 import { MainViewComponent } from './pages/main-view/main-view.component';
@@ -9,7 +10,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'boards', pathMatch: 'full' },
   { path: 'boards', component: BoardViewComponent },
   { path: 'boards/:id', component: MainViewComponent },
-  { path: 'new-board', component: NewBoardComponent }
+  { path: 'new-board', component: NewBoardComponent },
+  { path: 'new-task', component: NewTaskComponent }
 ];
 
 @NgModule({
