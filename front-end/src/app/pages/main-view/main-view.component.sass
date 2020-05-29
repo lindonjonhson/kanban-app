@@ -8,24 +8,70 @@
             font-weight: bold
             color: white
 
-.board-column
-    .add-btn
-        max-height: 2.5em
-        margin-left: auto
-        margin-top: auto
-        border-radius: 0
+    .board-wrapper
+            display: flex
+            flex-grow: 1
+            overflow-x: auto // so we can get the scroll bar
 
-.new-column
-    align-items: center
+            .board-columns
+                display: flex
+                flex-grow: 1
 
-    .column-title
-        margin: auto !important
-        transition: all 500ms
+                .board-column
+                    display: flex
+                    flex-direction: column
+                    flex-grow: 1
+                    flex-basis: 0 // for the columns to have the same size, regardless of the content
+                    background: rgba(white, 0.5)
 
+                    min-width: 300px
+                    margin: 50px
+                    padding: 25px
 
+                    &.new-column
+                        align-items: center
+                        width: 210px
+                        .column-title
+                            margin: auto !important
+                            transition: all 500ms
+                        &:hover
+                            .column-title
+                                // box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35rem 1.175rem, rgba(2, 8, 20, 0.08) 0px 0.175rem 0.5rem
+                                transform: translateY(-3px) scale(1.1)
 
-    &:hover
-        .column-title
-            // box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35rem 1.175rem, rgba(2, 8, 20, 0.08) 0px 0.175rem 0.5rem
-            transform: translateY(-3px) scale(1.1)
+                    
+                    .column-title
+                        font-size: 20px
+                        font-weight: 800
+                        font-family: 'Lato', sans-serif
+                        text-transform: uppercase
+                        margin-bottom: 20px
+
+                    .tasks-container
+                        flex-grow: 1
+
+                        .task
+                            display: flex
+                            padding: 15px 12px
+                            background: white
+                            border-bottom: solid 1px #ddd
+
+                            margin-bottom: 15px
+
+                            box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.05), 0 3px 14px 2px rgba(0, 0, 0, 0.05)
+
+                :not(:first-child) // to avoid double margin in the left side of the columns
+                    margin-left: 0px
+                    
+                .add-btn
+                    max-height: 2.5em
+                    margin-left: auto
+                    margin-top: auto
+                    border-radius: 0
+
+                
+    
+
+                    
+                
 
