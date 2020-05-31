@@ -1,3 +1,4 @@
+import { Task } from './../../models/task.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AppService } from './../../services/app.service';
 import { Component, OnInit } from '@angular/core';
@@ -22,6 +23,13 @@ export class NewTaskComponent implements OnInit {
         this.columnId = params.columnId;
       }
     );
+  }
+
+  createTask(title: string) {
+    this.appServ.createTask(this.boardId, this.columnId, title).subscribe((newTask: Task) => {
+      console.log(newTask);
+      this.router.navigate([`/boards`, this.boardId]);
+    });
   }
 
 }

@@ -40,19 +40,19 @@ export class AppService {
     return this.webReqService.get(`boards/${boardId}/columns`);
   }
 
-  getColum(boardId: string, id: string) {
+  getColumn(boardId: string, id: string) {
     return this.webReqService.get(`boards/${boardId}/columns/${id}`);
   }
 
-  createColum(boardId: string, title: string) {
+  createColumn(boardId: string, title: string) {
     return this.webReqService.post(`boards/${boardId}/columns`, {title});
   }
 
-  deleteColum(boardId: string, id: string) {
+  deleteColumn(boardId: string, id: string) {
     return this.webReqService.delete(`boards/${boardId}/columns/${id}`);
   }
 
-  editColum(boardId: string, id: string, title: string) {
+  editColumn(boardId: string, id: string, title: string) {
     return this.webReqService.patch(`boards/${boardId}/columns/${id}`, {title});
   }
 
