@@ -1,3 +1,6 @@
+import { Board } from './../../models/board.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppService } from './../../services/app.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appServ: AppService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  createBoard(title: string){
+    this.appServ.createBoard(title).subscribe((newBoard: Board) => {
+      console.log(newBoard);
+      this.router.navigate([`../`, ], { relativeTo: this.route});
+    });
   }
 
 }
