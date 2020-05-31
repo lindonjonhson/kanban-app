@@ -1,3 +1,4 @@
+import { Column } from './../../models/column.model';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { AppService } from './../../services/app.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,6 +21,13 @@ export class NewColumnComponent implements OnInit {
         this.boardId = params.boardId;
       }
     );
+  }
+
+  createColumn(title: string){
+    this.appServ.createColumn(this.boardId, title).subscribe((newColumn: Column) => {
+      console.log(newColumn);
+      this.router.navigate([`/boards`, this.boardId]);
+    });
   }
 
 }
