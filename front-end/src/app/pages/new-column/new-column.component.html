@@ -10,15 +10,30 @@
 
     <div class="board">
         <div class="board-bar">
-            <p class="board-name">Board Title</p>
-            <a routerLink="/boards" class="back"> < Back</a>
+            <p class="board-name">New column</p>
+            
+            <a [routerLink]="['/boards', this.boardId]" class="back"> < Back</a>
         </div>
 
-        <div class="board-wrapper">
+        <!-- <div class="board-wrapper">
             <div class="board-columns" >
 
             </div>
+        </div> -->
+        
+        <div class="modal-box">
+            <h2 class="title">Create a new column</h2>
+
+            <input #columnTitleInput class="input has-background-light" type="text" placeholder="New column">
+            
+            <br><br>
+
+            <div class="buttons is-right">
+                <button  class="button is-primary">Create</button>
+            </div>
+
         </div>
+
     </div>
 
 </div>

@@ -32,17 +32,26 @@
                         <!-- <div class="task" >+ New task</div> -->
 
                     </div>
+                    
 
-                    <button routerLink="/new-task" class="add-btn circle-add-button button is-primary has-background-dark">
+                    <button [routerLink]="['/new-task', boardId, column._id]" class="add-btn button is-primary has-background-dark">
                         <span class="material-icons md-48">add</span>
                     </button>
 
+                    <!-- <button routerLink="/new-task" class="add-btn circle-add-button button is-primary has-background-dark">
+                        <span class="material-icons md-48">add</span>
+                    </button> -->
+
                 </div>
 
-                <div routerLink="/new-column" class="board-column new-column">
-
+                <div [routerLink]="['/new-column', boardId]" class="board-column new-column">
                     <div class="column-title">+ new column</div>
                 </div>
+
+                <!-- <div routerLink="/new-column" class="board-column new-column">
+
+                    <div class="column-title">+ new column</div>
+                </div> -->
 
             </div>
         </div>

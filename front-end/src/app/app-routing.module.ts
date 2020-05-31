@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: 'boards', component: BoardViewComponent },
   { path: 'boards/:id', component: MainViewComponent },
   { path: 'new-board', component: NewBoardComponent },
-  { path: 'new-column', component: NewColumnComponent },
-  { path: 'new-task', component: NewTaskComponent }
+  { path: 'new-column/:boardId', component: NewColumnComponent },
+  { path: 'new-task/:boardId/:columnId', component: NewTaskComponent }
 ];
 
 @NgModule({
