@@ -79,4 +79,8 @@ export class AppService {
   editTask(boardId: string, columnId: string, id: string, title: string) {
     return this.webReqService.patch(`boards/${boardId}/columns/${columnId}/tasks/${id}`, {title});
   }
+
+  changeTask(boardId: string, oldColumnId: string, id: string, _columnId: string) {
+    return this.webReqService.patch(`boards/${boardId}/columns/${oldColumnId}/tasks/${id}`, {_columnId});
+  }
 }

@@ -54,7 +54,7 @@ export class MainViewComponent implements OnInit {
 
                 this.appServ.getTasks(column._boardId, column._id).subscribe((tasks: Task[]) => {
                   column.tasks = tasks;
-                  console.log(column.tasks);
+                  // console.log(column.tasks);
                 });
               });
             });
@@ -65,7 +65,20 @@ export class MainViewComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
+    // console.log(event.container.data);
+    // console.log(event.currentIndex);
+
+    const oldColumn = event.previousContainer.element.nativeElement.attributes[3].value;
+
+    const newColumn = event.container.element.nativeElement.attributes[3].value;
+
+    const taskId = event.item.element.nativeElement.attributes[3].value;
+
+    console.log(taskId);
+
+    // console.log(event.previousContainer.data[event.previousIndex]);
+    // console.log(event.container.data[event.currentIndex]);
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -74,6 +87,9 @@ export class MainViewComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
+    this.appServ.changeTask(this.boardId, oldColumn, taskId, newColumn).subscribe((res) => {
+      console.log(res);
+    })
   }
 
 }

@@ -271,8 +271,9 @@ app.patch("/boards/:boardId/columns/:columnId/tasks/:id", (req, res) => {
             _id: req.params.id,
             _columnId: req.params.columnId
     }, { $set: req.body}
-    ).then(() => {
-        res.send({message: "Update completed"});
+    ).then((updatedTask) => {
+        // res.send({message: "Update completed"});
+        res.send(updatedTask);
     });
 });
 

@@ -24,10 +24,11 @@
 
                     <div class="tasks-container"
                         cdkDropList
+                        attr.data-id="{{column._id}}"
                         [cdkDropListData]="column.tasks"
                         (cdkDropListDropped)="drop($event)">
 
-                        <div class="task"  *ngFor="let task of column.tasks" cdkDrag>{{task.title}}</div>
+                        <div class="task"attr.data-id="{{task._id}}" *ngFor="let task of column.tasks" cdkDrag>{{task.title}}</div>
 
                         <!-- <div class="task" >+ New task</div> -->
 
